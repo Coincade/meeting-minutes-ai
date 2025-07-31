@@ -1,0 +1,9 @@
+FinTech Plus's Q2 2023 earnings call highlights a revenue of $125 million, marking a 25% increase year-over-year.
+The company's gross profit margin reached 58%, with EBITDA at $37.5 million, translating to a 30% EBITDA margin, and a net income of $16 million.
+The expansion of high-yield savings products and RoboAdvisor platform significantly contributed to the total addressable market growth.
+FinTech Plus diversified its asset-backed securities portfolio, investing in collateralized debt obligations and residential mortgage-backed securities, and $25 million in AAA-rated corporate bonds.
+The balance sheet shows $1.5 billion in assets and $900 million in liabilities with a debt to equity ratio of 1.5.
+Cultivating organic user growth, customer acquisition cost decreased by 15% while lifetime value increased by 25%, achieving an LTVCAC ratio of 3.5x.
+A value-at-risk model is utilized for risk management, expecting a maximum loss of $5 million in the next trading day at a 99% confidence level, along with a conservative approach for leverage and a tier one capital ratio of 12.5%.
+Forecasts for the next quarter are positive, with expected revenues of $135 million and an 8% growth driven by blockchain solutions and AI analytics.
+An upcoming IPO for Pay Plus is expected to raise $200 million, enhancing liquidity and supporting growth strategies.
