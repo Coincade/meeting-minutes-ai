@@ -1,5 +1,3 @@
-- Enhance risk-adjusted returns by investing in AAA-rated corporate bonds.
-- Maintain or improve the current debt-to-equity ratio of 1.5 during expansion.
-- Continue to drive organic user growth and reduce customer acquisition cost.
-- Monitor and further improve the LTVCAC ratio.
-- Utilize the value-at-risk model for effective risk management.
+- Expand high-yield savings product line
+- Develop and promote the new RoboAdvisor platform
+- Continue diversifying asset-backed securities portfolio
