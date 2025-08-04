@@ -9,8 +9,13 @@ from pydub import AudioSegment
 from pydub.utils import make_chunks
 from pathlib import Path
 
-from crews.meeting_minutes_crew.meeting_minutes_crew import MeetingMinutesCrew
-from crews.gmailcrew.gmailcrew import GmailCrew
+try:
+    from crews.meeting_minutes_crew.meeting_minutes_crew import MeetingMinutesCrew
+    from crews.gmailcrew.gmailcrew import GmailCrew
+except ImportError:
+    # Fallback to import helper
+    from import_helper import import_crews
+    MeetingMinutesCrew, GmailCrew = import_crews()
 
 import agentops
 from dotenv import load_dotenv

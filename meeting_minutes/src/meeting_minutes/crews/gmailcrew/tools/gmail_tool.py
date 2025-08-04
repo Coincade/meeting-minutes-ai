@@ -4,7 +4,14 @@ from datetime import datetime
 from crewai.tools import BaseTool
 from pydantic import BaseModel, Field
 
-from .gmail_utility import authenticate_gmail, create_message, create_draft
+try:
+    from .gmail_utility import authenticate_gmail, create_message, create_draft
+except ImportError:
+    # Fallback for when running as standalone script
+    import sys
+    import os
+    sys.path.append(os.path.dirname(__file__))
+    from gmail_utility import authenticate_gmail, create_message, create_draft
 # from agentops import record_tool
 
 import os

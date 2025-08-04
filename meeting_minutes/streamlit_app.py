@@ -6,12 +6,20 @@ from pathlib import Path
 import tempfile
 import shutil
 
-# Add the src directory to the path
-sys.path.append('src/meeting_minutes')
+# Add the src directory to the path - more robust approach for deployment
+current_dir = Path(__file__).parent
+src_path = current_dir / 'src' / 'meeting_minutes'
+sys.path.insert(0, str(src_path))
 
-# Import your existing modules
-from crews.meeting_minutes_crew.meeting_minutes_crew import MeetingMinutesCrew
-from crews.gmailcrew.gmailcrew import GmailCrew
+# Import your existing modules using the import helper
+try:
+    # Try to import the helper first
+    from import_helper import import_crews
+    MeetingMinutesCrew, GmailCrew = import_crews()
+except ImportError as e:
+    st.error(f"❌ Import error: {e}")
+    st.error("Please check the module structure and paths")
+    st.stop()
 from dotenv import load_dotenv
 
 # Load environment variables
