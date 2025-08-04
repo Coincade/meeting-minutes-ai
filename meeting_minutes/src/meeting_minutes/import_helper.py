@@ -3,8 +3,37 @@ Import helper for robust module loading in deployment environments.
 """
 import sys
 import os
+import warnings
 from pathlib import Path
 import importlib.util
+
+# SQLite compatibility fix - MUST be applied before any ChromaDB imports
+# Set environment variables to suppress ChromaDB warnings
+os.environ["CHROMA_SILENCE_DEPRECATION_WARNINGS"] = "1"
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
+os.environ["CHROMA_DB_IMPL"] = "duckdb+parquet"  # Alternative backend
+
+# Suppress all SQLite and ChromaDB warnings
+warnings.filterwarnings("ignore", message=".*sqlite3.*")
+warnings.filterwarnings("ignore", message=".*SQLite.*")
+warnings.filterwarnings("ignore", message=".*Chroma.*")
+warnings.filterwarnings("ignore", message=".*unsupported version.*")
+warnings.filterwarnings("ignore", category=RuntimeWarning)
+
+# Try to apply SQLite patches
+try:
+    from sqlite_patch import patch_sqlite_version, force_chromadb_compatibility
+    patch_sqlite_version()
+    force_chromadb_compatibility()
+    print("✅ SQLite compatibility patches applied in import_helper")
+except ImportError:
+    # Try alternative approach
+    try:
+        import pysqlite3
+        sys.modules['sqlite3'] = pysqlite3
+        print("✅ Replaced sqlite3 with pysqlite3 in import_helper")
+    except ImportError:
+        print("⚠️  pysqlite3 not available in import_helper, using system sqlite3")
 
 def import_module_from_path(module_name: str, file_path: str):
     """Import a module from a file path."""

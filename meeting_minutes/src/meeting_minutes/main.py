@@ -1,18 +1,36 @@
 #!/usr/bin/env python
-# SQLite compatibility fix
+# SQLite compatibility fix - MUST be applied before any ChromaDB imports
 import sys
 import warnings
+import os
 
-# Suppress SQLite version warnings
+# Set environment variables to suppress ChromaDB warnings
+os.environ["CHROMA_SILENCE_DEPRECATION_WARNINGS"] = "1"
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
+os.environ["CHROMA_DB_IMPL"] = "duckdb+parquet"  # Alternative backend
+
+# Suppress all SQLite and ChromaDB warnings
 warnings.filterwarnings("ignore", message=".*sqlite3.*")
 warnings.filterwarnings("ignore", message=".*SQLite.*")
+warnings.filterwarnings("ignore", message=".*Chroma.*")
+warnings.filterwarnings("ignore", message=".*unsupported version.*")
+warnings.filterwarnings("ignore", category=RuntimeWarning)
 
 # Try to import and apply SQLite patch
 try:
-    from sqlite_patch import patch_sqlite_version
+    from sqlite_patch import patch_sqlite_version, force_chromadb_compatibility
     patch_sqlite_version()
-except ImportError:
-    pass
+    force_chromadb_compatibility()
+    print("✅ SQLite compatibility patches applied successfully")
+except ImportError as e:
+    print(f"⚠️  Could not import SQLite patch: {e}")
+    # Try alternative approach
+    try:
+        import pysqlite3
+        sys.modules['sqlite3'] = pysqlite3
+        print("✅ Replaced sqlite3 with pysqlite3")
+    except ImportError:
+        print("⚠️  pysqlite3 not available, using system sqlite3")
 
 import os
 from datetime import datetime

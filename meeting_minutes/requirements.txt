@@ -1,5 +1,5 @@
 ﻿# Core dependencies for Meeting Minutes AI
-crewai[tools]>=0.148.0,<1.0.0
+crewai[tools]>=0.148.0,<0.153.0
 streamlit>=1.47.0
 openai>=1.97.0
 python-dotenv>=1.1.0
@@ -7,6 +7,9 @@ pydub>=0.25.0
 google-api-python-client>=2.177.0
 google-auth-oauthlib>=1.2.2
 google-auth-httplib2>=0.2.0
+
+# ChromaDB with specific version for compatibility
+chromadb>=0.4.0,<0.6.0
 
 # File processing
 pypdf>=5.8.0

@@ -16,6 +16,50 @@ Welcome to the Meeting Minutes AI project, powered by [crewAI](https://crewai.co
 - OpenAI API key
 - (Optional) Gmail API credentials for email processing
 
+## SQLite Compatibility
+
+This application uses ChromaDB which requires SQLite >= 3.35.0. If you encounter SQLite version errors:
+
+### Automatic Fix (Recommended)
+The application includes automatic SQLite compatibility patches that will:
+- Install `pysqlite3-binary` for newer SQLite support
+- Apply environment variable patches
+- Suppress compatibility warnings
+
+### Manual Fix
+If automatic patches don't work:
+
+1. **Install ChromaDB with specific version:**
+   ```bash
+   pip install chromadb>=0.4.0,<0.5.0
+   ```
+
+2. **Set environment variables:**
+   
+   **For Linux/macOS:**
+   ```bash
+   export CHROMA_SILENCE_DEPRECATION_WARNINGS=1
+   export TOKENIZERS_PARALLELISM=false
+   export CHROMA_DB_IMPL=duckdb+parquet
+   ```
+   
+   **For Windows PowerShell:**
+   ```powershell
+   .\setup_windows.ps1
+   ```
+   
+   **For Windows Command Prompt:**
+   ```cmd
+   set CHROMA_SILENCE_DEPRECATION_WARNINGS=1
+   set TOKENIZERS_PARALLELISM=false
+   set CHROMA_DB_IMPL=duckdb+parquet
+   ```
+
+3. **Upgrade system SQLite (if possible):**
+   - **Ubuntu/Debian:** `sudo apt update && sudo apt install sqlite3`
+   - **macOS:** `brew install sqlite3`
+   - **Windows:** Download from [SQLite website](https://www.sqlite.org/download.html)
+
 ## Installation
 
 ### Method 1: Automated Installation (Recommended)
