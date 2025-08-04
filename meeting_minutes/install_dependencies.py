@@ -35,19 +35,19 @@ def main():
     print("📦 Note: Using SQLite compatibility patch instead of pysqlite3...")
     print("   The application includes a patch to work around SQLite version issues.")
     
-    # Install the package in development mode
-    print("📦 Installing package dependencies...")
-    if not run_command("pip install -e .", "Installing package in development mode"):
-        print("❌ Failed to install package dependencies")
-        sys.exit(1)
-    
-    # Install additional requirements if requirements.txt exists
+    # Install requirements
     requirements_file = Path("requirements.txt")
     if requirements_file.exists():
-        print("📦 Installing additional requirements...")
-        if not run_command("pip install -r requirements.txt", "Installing requirements"):
-            print("❌ Failed to install requirements")
+        print("📦 Installing dependencies...")
+        if not run_command("pip install -r requirements.txt", "Installing dependencies"):
+            print("❌ Failed to install dependencies")
             sys.exit(1)
+    
+    # Install the package in development mode
+    print("📦 Installing package in development mode...")
+    if not run_command("pip install -e .", "Installing package in development mode"):
+        print("❌ Failed to install package in development mode")
+        sys.exit(1)
     
     print("🎉 Installation completed successfully!")
     print("\n📋 Next steps:")
