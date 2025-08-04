@@ -11,6 +11,10 @@ google-auth-httplib2>=0.2.0
 # ChromaDB with specific version for compatibility
 chromadb>=0.4.0,<0.6.0
 
+# Markdown and text processing
+markdown>=3.0.0
+markdownify>=0.11.0
+
 # File processing
 pypdf>=5.8.0
 pdfplumber>=0.11.0
@@ -29,6 +33,11 @@ tqdm>=4.67.0
 rich>=13.9.0
 click>=8.2.0
 typer>=0.16.0
+
+# Additional dependencies that might be needed
+lxml>=4.9.0
+html5lib>=1.1
+bleach>=6.0.0
 
 # Development and testing
 pytest>=7.0.0

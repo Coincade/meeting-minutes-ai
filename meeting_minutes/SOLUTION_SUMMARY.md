@@ -68,4 +68,24 @@ streamlit run streamlit_app.py
 ✅ **CrewAI imports successfully**
 ✅ **Streamlit app starts without errors**
 
+## Additional Fixes
+
+### Missing Dependencies
+If you encounter "NO MODULE NAMED MARKDOWN" or other missing module errors:
+
+1. **Quick Fix:**
+   ```bash
+   python fix_missing_deps.py
+   ```
+
+2. **Test Dependencies:**
+   ```bash
+   python test_markdown.py
+   ```
+
+3. **Manual Install:**
+   ```bash
+   pip install markdown>=3.0.0
+   ```
+
 The application should now run without SQLite-related errors. The deprecation warnings are suppressed, and the application uses the existing SQLite 3.35.5 version which is actually compatible with ChromaDB. 
