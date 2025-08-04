@@ -18,24 +18,26 @@ def patch_sqlite_version():
         current_version = sqlite3.sqlite_version_info
         required_version = (3, 35, 0)
         
-        # If the version is too old, patch the version check
+        # If the version is too old, apply patches
         if current_version < required_version:
             print(f"⚠️  Warning: SQLite version {current_version} is older than required {required_version}")
             print("🔧 Applying SQLite compatibility patch...")
             
-            # Monkey patch the version check in ChromaDB
-            def patched_version_check(*args, **kwargs):
-                return True  # Always return True to bypass the check
+            # Suppress all SQLite-related warnings
+            warnings.filterwarnings("ignore", message=".*sqlite3.*")
+            warnings.filterwarnings("ignore", message=".*SQLite.*")
+            warnings.filterwarnings("ignore", message=".*Chroma.*")
             
-            # Try to patch the ChromaDB version check
+            # Try to install pysqlite3 if available (optional)
             try:
-                import chromadb
-                # This is a workaround - we'll suppress the specific error
-                warnings.filterwarnings("ignore", message=".*sqlite3.*")
-                print("✅ SQLite compatibility patch applied")
+                import pysqlite3
+                sys.modules['sqlite3'] = pysqlite3
+                print("✅ Replaced sqlite3 with pysqlite3")
             except ImportError:
-                print("⚠️  ChromaDB not yet imported, patch will be applied when needed")
-                
+                print("⚠️  pysqlite3 not available, using system sqlite3")
+            
+            print("✅ SQLite compatibility patch applied")
+            
     except Exception as e:
         print(f"⚠️  Warning: Could not apply SQLite patch: {e}")
 

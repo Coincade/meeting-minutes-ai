@@ -7,22 +7,6 @@ pydub>=0.25.0
 google-api-python-client>=2.177.0
 google-auth-oauthlib>=1.2.2
 google-auth-httplib2>=0.2.0
-pydantic>=2.0.0,<3.0.0
-chromadb>=0.5.23
-
-# Additional dependencies for full functionality
-langchain>=0.3.0
-langchain-openai>=0.2.0
-langchain-community>=0.3.0
-langchain-core>=0.3.0
-langchain-text-splitters>=0.3.0
-langchain-experimental>=0.3.0
-langchain-cohere>=0.3.0
-
-# Vector database and embeddings
-qdrant-client>=1.14.0
-cohere>=5.16.0
-sentence-transformers>=2.0.0
 
 # File processing
 pypdf>=5.8.0
@@ -31,7 +15,6 @@ openpyxl>=3.1.0
 python-docx>=1.1.0
 
 # Audio processing
-pydub>=0.25.0
 SpeechRecognition>=3.10.0
 
 # Utilities
@@ -48,20 +31,3 @@ typer>=0.16.0
 pytest>=7.0.0
 black>=23.0.0
 flake8>=6.0.0
-
-# Monitoring and logging
-opentelemetry-api>=1.30.0
-opentelemetry-sdk>=1.30.0
-opentelemetry-exporter-otlp-proto-http>=1.30.0
-
-# JSON and data handling
-json-repair>=0.25.0
-json5>=0.10.0
-jsonschema>=4.24.0
-
-# Other utilities
-appdirs>=1.4.0
-portalocker>=2.7.0
-litellm>=1.74.0
-tokenizers>=0.20.0
-regex>=2024.9.0
