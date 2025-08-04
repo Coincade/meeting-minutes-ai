@@ -1,56 +1,142 @@
-# {{crew_name}} Crew
+# Meeting Minutes AI
 
-Welcome to the {{crew_name}} Crew project, powered by [crewAI](https://crewai.com). This template is designed to help you set up a multi-agent AI system with ease, leveraging the powerful and flexible framework provided by crewAI. Our goal is to enable your agents to collaborate effectively on complex tasks, maximizing their collective intelligence and capabilities.
+Welcome to the Meeting Minutes AI project, powered by [crewAI](https://crewai.com). This application automatically generates meeting minutes from audio recordings using a multi-agent AI system.
+
+## Features
+
+- 🎤 Audio transcription using OpenAI Whisper
+- 📝 Automatic meeting minutes generation
+- 📧 Gmail integration for email processing
+- 🎨 Modern Streamlit web interface
+- 🤖 Multi-agent AI collaboration
+
+## Prerequisites
+
+- Python >=3.10 <3.14
+- OpenAI API key
+- (Optional) Gmail API credentials for email processing
 
 ## Installation
 
-Ensure you have Python >=3.10 <3.14 installed on your system. This project uses [UV](https://docs.astral.sh/uv/) for dependency management and package handling, offering a seamless setup and execution experience.
+### Method 1: Automated Installation (Recommended)
 
-First, if you haven't already, install uv:
+Run the automated installation script:
+
+```bash
+python install_dependencies.py
+```
+
+This script will:
+- Install SQLite compatibility packages
+- Set up all dependencies
+- Handle common installation issues
+
+### Method 2: Manual Installation
+
+If you prefer manual installation:
+
+1. **Install SQLite compatibility first:**
+   ```bash
+   pip install pysqlite3-binary>=0.5.2
+   ```
+
+2. **Install the package:**
+   ```bash
+   pip install -e .
+   ```
+
+3. **Install additional requirements:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+### Method 3: Using UV (Alternative)
+
+If you have UV installed:
 
 ```bash
 pip install uv
+uv pip install pysqlite3-binary>=0.5.2
+uv pip install -e .
+uv pip install -r requirements.txt
 ```
 
-Next, navigate to your project directory and install the dependencies:
+## Configuration
 
-(Optional) Lock the dependencies and install them by using the CLI command:
+1. **Create a `.env` file** in the project root with your API keys:
+   ```env
+   OPENAI_API_KEY=your_openai_api_key_here
+   ```
+
+2. **For Gmail integration** (optional), add:
+   ```env
+   GMAIL_CLIENT_ID=your_gmail_client_id
+   GMAIL_CLIENT_SECRET=your_gmail_client_secret
+   GMAIL_REFRESH_TOKEN=your_gmail_refresh_token
+   ```
+
+## Running the Application
+
+### Streamlit Web Interface (Recommended)
+
 ```bash
-crewai install
+streamlit run streamlit_app.py
 ```
 
-### Customizing
+This launches a modern web interface where you can:
+- Upload audio files
+- Generate meeting minutes
+- View results in real-time
 
-**Add your `OPENAI_API_KEY` into the `.env` file**
-
-- Modify `src/meeting_minutes/config/agents.yaml` to define your agents
-- Modify `src/meeting_minutes/config/tasks.yaml` to define your tasks
-- Modify `src/meeting_minutes/crew.py` to add your own logic, tools and specific args
-- Modify `src/meeting_minutes/main.py` to add custom inputs for your agents and tasks
-
-## Running the Project
-
-To kickstart your flow and begin execution, run this from the root folder of your project:
+### Command Line Interface
 
 ```bash
-crewai run
+python src/meeting_minutes/main.py
 ```
 
-This command initializes the meeting-minutes Flow as defined in your configuration.
+This runs the core meeting minutes generation workflow.
 
-This example, unmodified, will run the create a `report.md` file with the output of a research on LLMs in the root folder.
+## Troubleshooting
 
-## Understanding Your Crew
+### SQLite Version Issues
 
-The meeting-minutes Crew is composed of multiple AI agents, each with unique roles, goals, and tools. These agents collaborate on a series of tasks, defined in `config/tasks.yaml`, leveraging their collective skills to achieve complex objectives. The `config/agents.yaml` file outlines the capabilities and configurations of each agent in your crew.
+If you encounter SQLite version errors, the installation script should handle this automatically. If issues persist:
+
+1. Ensure `pysqlite3-binary` is installed:
+   ```bash
+   pip install pysqlite3-binary>=0.5.2
+   ```
+
+2. The application includes SQLite compatibility fixes in the code
+
+### Import Errors
+
+If you see import errors:
+1. Ensure you're in the project root directory
+2. Run `python install_dependencies.py` to fix dependency issues
+3. Check that all requirements are installed
+
+## Project Structure
+
+```
+meeting_minutes/
+├── src/meeting_minutes/
+│   ├── crews/                    # AI crew definitions
+│   │   ├── meeting_minutes_crew/ # Meeting minutes generation
+│   │   └── gmailcrew/           # Gmail processing
+│   ├── tools/                   # Custom tools
+│   └── main.py                  # CLI entry point
+├── streamlit_app.py             # Web interface
+├── install_dependencies.py      # Installation script
+└── requirements.txt             # Dependencies
+```
 
 ## Support
 
-For support, questions, or feedback regarding the {{crew_name}} Crew or crewAI.
+For support, questions, or feedback:
 
 - Visit our [documentation](https://docs.crewai.com)
-- Reach out to us through our [GitHub repository](https://github.com/joaomdmoura/crewai)
+- Reach out through our [GitHub repository](https://github.com/joaomdmoura/crewai)
 - [Join our Discord](https://discord.com/invite/X4JWnZnxPb)
-- [Chat with our docs](https://chatg.pt/DWjSBZn)
 
-Let's create wonders together with the power and simplicity of crewAI.
+Let's create amazing meeting minutes together with the power of AI! 🚀
