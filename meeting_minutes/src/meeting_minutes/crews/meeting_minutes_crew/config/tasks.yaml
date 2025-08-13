@@ -20,14 +20,18 @@ meeting_minutes_summarizer_task:
 
 meeting_minutes_writer_task:
   description: >
-    Write the meeting minutes based on the summary, action items and sentiment.  This should give everything needed to know based on summary and action items.
+    Write the meeting minutes based on the summary, action items and sentiment from the current transcript processing.  
     Put them into a nice markdown document.
 
-    - Extract the meeting date from the transcript or use today's date if not found
-    - Use a generic company name or extract from the transcript
-    - Extract the organizer name from the transcript or use a generic name
+    IMPORTANT: Extract ALL information from the current transcript only. Do NOT use any information from existing files or previous runs.
+
+    - ALWAYS use today's current date for the meeting date (do not try to extract from transcript)
+    - Extract the company name from the transcript or use "Company Meeting" if not found
+    - Extract the organizer name from the transcript or use "Meeting Organizer" if not found
     - Create a list of attendees from the transcript (make up some if needed)
-    - Extract the meeting location from the transcript or use "Offline Meeting" if not found
+    - Extract the meeting location from the transcript or use "Virtual Meeting" if not found
+    
+    Do not reference any specific company names like "FinTech Plus" unless they are explicitly mentioned in the current transcript.
   expected_output: >
-    A meeting minutes document
+    A meeting minutes document based on the current transcript only with today's date
   agent: meeting_minutes_writer
