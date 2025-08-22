@@ -93,8 +93,8 @@ class MeetingMinutesFlow(Flow[MeetingMinutesState]):
             self.state.meeting_minutes = str(meeting_minutes)
 
     @listen(generate_meeting_minutes)
-    def create_meeting_minutes_draft(self):
-        print("Creating Meeting Minutes Email Draft")
+    def send_meeting_minutes_email(self):
+        print("Sending Meeting Minutes Email")
         
         # Get email configuration
         sender = os.getenv("GMAIL_SENDER")
@@ -116,17 +116,16 @@ class MeetingMinutesFlow(Flow[MeetingMinutesState]):
             "body": str(self.state.meeting_minutes)
         }
         
-        print("Creating email draft...")
+        print("Sending email...")
         result = crew.crew().kickoff(inputs)
         result_str = str(result)
-        print(f"Draft Result: {result_str}")
+        print(f"Send Result: {result_str}")
         
         if "successfully" in result_str.lower():
-            print("✓ Email draft created successfully!")
-            print(f"Check your Gmail drafts folder for the meeting minutes draft.")
-            print(f"The draft will be sent to: {recipient}")
+            print("✓ Email sent successfully!")
+            print(f"The meeting minutes email has been sent to: {recipient}")
         else:
-            print("✗ Email draft creation failed!")
+            print("✗ Email sending failed!")
             print("Check the error message above for details.")
 
 def kickoff():

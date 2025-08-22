@@ -21,9 +21,9 @@ class GmailCrew():
     # If you would like to add tools to your agents, you can learn more about it here:
     # https://docs.crewai.com/concepts/agents#agent-tools
     @agent
-    def gmail_draft_agent(self) -> Agent:
+    def gmail_send_agent(self) -> Agent:
         return Agent(
-            config=self.agents_config['gmail_draft_agent'], # type: ignore[index]
+            config=self.agents_config['gmail_send_agent'], # type: ignore[index]
             tools=[GmailTool()], # type: ignore[index]
             verbose=True
         )
@@ -32,9 +32,9 @@ class GmailCrew():
     # task dependencies, and task callbacks, check out the documentation:
     # https://docs.crewai.com/concepts/tasks#overview-of-a-task
     @task
-    def gmail_draft_task(self) -> Task:
+    def gmail_send_task(self) -> Task:
         return Task(
-            config=self.tasks_config['gmail_draft_task'], # type: ignore[index]
+            config=self.tasks_config['gmail_send_task'], # type: ignore[index]
         )
 
     @crew
